@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    width: 1080px;
+    height: 1350px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, #c0392b 0%, #7b241c 100%);
+    font-family: Arial, sans-serif;
+  }
+
+  .fondo {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.15);
+    z-index: 2;
+  }
+
+  .contenido {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 3;
+    padding: 70px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .concierto-label {
+    font-family: Arial, sans-serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.82);
+    letter-spacing: 10px;
+    margin-bottom: 20px;
+  }
+
+  .artista-bloque {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .artista-linea1 {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-weight: 900;
+    font-size: 190px;
+    color: #ffffff;
+    line-height: 0.92;
+    word-break: break-word;
+  }
+
+  .artista-linea2 {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-weight: 900;
+    font-size: 115px;
+    color: #ffffff;
+    line-height: 0.92;
+    word-break: break-word;
+    margin-top: 12px;
+  }
+
+  .artista-single {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-weight: 900;
+    font-size: 210px;
+    color: #ffffff;
+    line-height: 0.9;
+    word-break: break-word;
+  }
+
+  .fecha-bloque {
+    margin-bottom: 60px;
+  }
+
+  .dia-texto {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-weight: 800;
+    font-size: 100px;
+    color: #ffffff;
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+
+  .hora-caja {
+    display: inline-flex;
+    align-items: center;
+    border: 5px solid rgba(255,255,255,0.92);
+    padding: 8px 22px 8px 16px;
+    position: relative;
+  }
+
+  .hora-barra {
+    width: 7px;
+    background: rgba(255,255,255,0.92);
+    align-self: stretch;
+    margin-right: 14px;
+  }
+
+  .hora-texto {
+    font-family: Arial, sans-serif;
+    font-size: 48px;
+    font-weight: 500;
+    color: #ffffff;
+  }
+
+  .logo-bloque {
+    height: 160px;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .logo {
+    height: 150px;
+    width: auto;
+    object-fit: contain;
+    object-position: left bottom;
+    filter: brightness(0) invert(1);
+  }
+
+  .logo-voraz {
+    height: 180px;
+  }
+</style>
+</head>
+<body>
+
+  <img class="fondo" src="{{fondo_url}}" onerror="this.style.display='none'">
+  <div class="overlay"></div>
+
+  <div class="contenido">
+
+    <div class="concierto-label">CONCIERTO</div>
+
+    <div class="artista-bloque">
+      <!-- Si artista tiene DOS palabras: usa artista-linea1 + artista-linea2 -->
+      <!-- Si artista tiene UNA palabra: usa artista-single -->
+      <!-- Make elige cuál mostrar según si artista_linea2 está vacío -->
+
+      {{#if artista_linea2}}
+        <div class="artista-linea1">{{artista_linea1}}</div>
+        <div class="artista-linea2">{{artista_linea2}}</div>
+      {{else}}
+        <div class="artista-single">{{artista_linea1}}</div>
+      {{/if}}
+    </div>
+
+    <div class="fecha-bloque">
+      <div class="dia-texto">{{dia}}</div>
+      <div class="hora-caja">
+        <div class="hora-barra"></div>
+        <div class="hora-texto">{{hora}}H</div>
+      </div>
+    </div>
+
+    <div class="logo-bloque">
+      <img class="logo logo" src="{{logo_url}}">
+    </div>
+
+  </div>
+
+</body>
+</html>
